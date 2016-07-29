@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Fractal 3D</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="http://threejs.org/build/three.js"></script>
+		
+<!-- <script src="trackballcontrols.js"></script>
+	 <script src="http://threejs.org/examples/js/Detector.js"></script>
+	 <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+ -->
+		<script>
+
+			// if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var container;
+
+			var camera, scene,renderer, object;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.y = 400;
+
+				scene = new THREE.Scene();
+
+				var light;
+
+				scene.add( new THREE.AmbientLight( 0x404040 ) );
+
+				light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 0, 1, 0 );
+				scene.add( light );
+
+				// var map = new THREE.TextureLoader().load( 'textures/UV_Grid_Sm.jpg' );
+				// map.wrapS = map.wrapT = THREE.RepeatWrapping;
+				// map.anisotropy = 16;
+
+				var material = new THREE.MeshBasicMaterial( {wireframe:true,color:0x1e1d1c } );
+
+				//
+				// var object_geometry = new THREE.SphereGeometry( 100, 100, 100 );
+				// // object_geometry.applyMatrix( new THREE.Matrix4().makeScale( 1.0, 1.0, 1.0 ) );
+				// object = new THREE.Mesh( object_geometry, material );
+				// object.position.set(0,0,0);
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.IcosahedronGeometry( 75, 1 ), material );
+				// object.position.set( -200, 0, 200 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.OctahedronGeometry( 100, 2 ), material );
+				// object.position.set( 0, 0, 0 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.TetrahedronGeometry( 150, 0 ), material );
+				// object.position.set( 0, 0, 0 );
+				// scene.add( object );
+
+				//
+
+				// object = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100, 4, 4 ), material );
+				// object.position.set( -400, 0, 0 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100, 4, 4, 4 ), material );
+				// object.position.set( -200, 0, 0 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.CircleGeometry( 50, 20, 0, Math.PI * 2 ), material );
+				// object.position.set( 0, 0, 0 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.RingGeometry( 10, 50, 20, 5, 0, Math.PI * 2 ), material );
+				// object.position.set( 0, 0, 0 );
+				// scene.add( object );
+
+				object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 8), material );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );
+
+				//
+
+			 geometry = new THREE.Geometry(); /*	NO ONE SAID ANYTHING ABOUT MATH! UGH!	*/
+
+        particleCount = 50000; /* Leagues under the sea */
+
+        /*	Hope you took your motion sickness pills;
+	We're about to get loopy.	*/
+
+            var k = 0;
+           	var m = 0;
+            var n = 0;
+            
+
+
+        for (i = 0; i < particleCount; i++) {
+
+           
+
+        	var p  = (Math.floor(Math.random() * (18 -1 + 1)) +1);
+        	
+        	var vertex = new THREE.Vector3();
+        	vertex.x = k ;
+        	vertex.y = m ;
+        	vertex.z = n ;
+
+        	geometry.vertices.push(vertex);
+
+             k = (object.geometry.vertices[p-1].x + k)/2;
+             m = (object.geometry.vertices[p-1].y + m)/2;
+             n = (object.geometry.vertices[p-1].z + n)/2;
+
+            
+
+        }
+
+
+        /*	I told you to take those motion sickness pills.
+	Clean that vommit up, we're going again!	*/
+
+      
+            var material = new THREE.PointCloudMaterial({color: 0xe75903, size:1});
+
+            particles = new THREE.PointCloud(geometry,material);
+
+            scene.add(particles);
+
+				// object = new THREE.Mesh( new THREE.LatheGeometry( points, 20 ), material );
+				// object.position.set( -400, 0, -200 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.TorusGeometry( 50, 20, 20, 20 ), material );
+				// object.position.set( -200, 0, -200 );
+				// scene.add( object );
+
+				// object = new THREE.Mesh( new THREE.TorusKnotGeometry( 50, 10, 50, 20 ), material );
+				// object.position.set( 0, 0, -200 );
+				// scene.add( object );
+
+				// object = new THREE.AxisHelper( 50 );
+				// object.position.set( 200, 0, -200 );
+				// scene.add( object );
+
+				// object = new THREE.ArrowHelper( new THREE.Vector3( 0, 1, 0 ), new THREE.Vector3( 0, 0, 0 ), 50 );
+				// object.position.set( 400, 0, -200 );
+				// scene.add( object );
+
+				//
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				container.appendChild( renderer.domElement );
+
+				// stats = new Stats();
+				// container.appendChild( stats.dom );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+				// stats.update();
+
+			}
+
+			function render() {
+
+				var timer = Date.now() * 0.0001;
+
+				camera.position.x = Math.cos( timer ) * 300;
+				camera.position.y = Math.cos( timer ) * 300;
+				camera.position.z = Math.sin( timer ) * 300;
+
+				camera.lookAt( scene.position );
+
+				// for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+
+				// 	var object = scene.children[ i ];
+
+				// 	object.rotation.x = timer * 0.5;
+				// 	object.rotation.y = timer * 0.4;
+
+				// }
+
+				renderer.render( scene, camera );
+
+			}
+
+			 function onDocumentMouseMove(e) {
+        mouseX = e.clientX - 0.5*window.innerWidth;
+        mouseY = e.clientY -  0.5*window.innerHeight;
+    }
+
+
+		</script>
+
+	</body>
+</html>
