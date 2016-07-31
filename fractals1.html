@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        font-family: Arial; 
+        color:white; 
+        background: black;
+      }
+
+
+      #button2{
+        position:absolute; 
+        background:#2f2f2a;
+        width: 200px; 
+        right:200px; 
+        top:100px; 
+        padding :10px; 
+        z-index: 1;
+        text-align:center;
+        cursor:pointer;
+        border-radius: 4px;
+
+      }
+      #button1{
+        position:absolute; 
+        background:#2f2f2a;
+        width: 200px; 
+        right:200px; 
+        top:450px;
+        z-index: 1;
+        padding :10px; 
+        text-align:center;
+        cursor:pointer;
+        border-radius: 4px;
+
+
+      }
+      #rules{
+        position:absolute; 
+        background:#2f2f2a;
+        width: 200px; 
+        right:200px; 
+        top:200px;
+        z-index: 1;
+        padding :10px; 
+        text-align:center;
+        cursor:pointer;
+        border-radius: 4px;
+
+
+      }
+      #rules:hover{
+        background: #727265;
+        color: black;
+        
+      }
+      #button1:hover{
+        background: #727265;
+        color: black;
+        
+      }
+      #button2:hover{
+        background: #727265;
+        color: black;
+        
+      }
+      #message{
+        position: absolute;
+        width : 400px;
+        top : 230px;
+        right: 110px;
+        color: white;
+        background: #131212;
+        padding : 10px;
+        letter-spacing: 1px;
+        border-radius: 4px;
+
+
+      }
+      @media (max-width: 1024px){
+        #message
+        {
+        width : 200px;
+        top :230px;
+        right: 200px;
+      
+   
+          }
+          #mycanvas{
+            position: absolute;
+            top:300px;
+  width : 400px;
+}
+}
+
+
+        #next{
+
+        position:absolute; 
+        background:#2f2f2a;
+        width: 200px; 
+        right:200px; 
+        top:550px;
+        z-index: 1;
+        padding :10px; 
+        text-align:center;
+        cursor:pointer;
+        border-radius: 4px;
+
+
+
+        }
+        #next:hover{
+        background: #727265;
+        color: black;
+        
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div id = "next" onclick="next()">Next Shape</div>
+  
+    <canvas id="mycanvas" width="600" height="600" style="background:transparent; z-index:1; position:absolute; left:0px; top:0px;"></canvas>
+   <!--  <input id= "sides" type="range" name="points" min="0" max="10" step="1"> -->
+     <div id="button2" onclick="slow()">Slow Animation</div>
+     <div id="rules">Show me the rules </div>
+     <p id="message">
+       1 : Notice the random point R inside the shape <br>
+       2 : Pick any vertex of your choice <br>
+       3 : Plot the midpoint between R and that vertex<br>
+       4 : That midpoint is the new R <br>
+       5 : Repeat this forever<br>
+     </p>
+    <div id="button1" onclick= "fast()">Fast Animation</div>
+    <!-- <iframe width="40%" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/260009005&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe> -->
+   
+  </body>
+
+    <script type="text/javascript">
+      var point=[];
+      var canvas = document.getElementById('mycanvas');
+      var context = canvas.getContext('2d');
+   
+      context.font = '14pt Arial';
+      context.fillStyle = 'white';
+      context.strokeStyle = 'black';
+
+      function drawPoint(x,y,radius) {
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI*2, true);
+      context.fill();
+    }
+
+function drawText(message,x,y)
+{
+context.fillText(message, x,y);
+context.strokeText(message, x,y );
+}
+
+// var n = $("#sides").val();
+
+var n=3;
+var a = [];
+var count=0;
+
+function readyFn( jQuery ){
+$("#message").hide();
+  var hidden =true;
+    $("#rules").mouseover(function(){
+       if(hidden==false){
+
+        $("#message").hide();
+        $("#rules").text("Show me the rules");
+hidden = true;
+}
+else {
+$("#message").show();
+$("#rules").text("Hide these boring rules");
+hidden=false;
+}
+});
+  for(var j=1; j<=n; j++)
+{
+    var theta = (2*Math.PI*j)/n; 
+    var l = 300 + 250*Math.cos(theta);
+    var m = 300 + 250*Math.sin(theta);
+    point[j] = [l,m];
+    drawText("("+j+")",300 + 260*Math.cos(theta),300 + 260*Math.sin(theta));
+    drawPoint(point[j][0],point[j][1],1);
+
+}
+
+  
+  a[0] = 300 + 50*Math.random()
+  a[1] = 300 + 50*Math.random()
+  drawPoint(a[0],a[1],1);
+  drawText("R",a[0]+10,a[1]+10);
+      
+}
+$( document ).ready( readyFn );
+
+
+  function slow(){ 
+    var i = 1;
+(function myLoop (i) {          
+   setTimeout(function () {   
+    var x = (Math.floor(Math.random() * (n -1 + 1)) +1);
+    count++;
+    drawPoint((point[x][0] + a[0])/2,(point[x][1] + a[1])/2,2);
+    a[0] = (point[x][0] + a[0])/2;
+    a[1]= (point[x][1] + a[1])/2;         //  your code here                
+      if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
+   }, 3000)
+})(10);
+}
+function fast(){
+  var i = 1;
+(function myLoop (i) {          
+   setTimeout(function () {   
+    var x = (Math.floor(Math.random() * (n -1 + 1)) +1);
+    drawPoint((point[x][0] + a[0])/2,(point[x][1] + a[1])/2,0.1);
+    a[0] = (point[x][0] + a[0])/2;
+    a[1]= (point[x][1] + a[1])/2;         //  your code here                
+      if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
+   }, 1)
+})(15000);
+}
+
+function next(){
+  context.clearRect(0,0,600,600);
+  n++;
+  if(n>9)
+  {
+    n=3;
+  }
+  else if(n==4){
+    n=5;
+  }
+  $("#button1").hide();
+  $("#button2").hide();
+  readyFn();
+  fast();
+
+}
+  // for (var i = 1; i<1000; i++) {
+  //   var x = (Math.floor(Math.random() * (6 -1 + 1)) +1);
+  //   drawPoint((point[x][0] + a[0])/2,(point[x][1] + a[1])/2);
+  //   a[0] = (point[x][0] + a[0])/2;
+  //   a[1]= (point[x][1] + a[1])/2;
+   
+  // };
+
+ 
+
+
+    </script>
+  </html>
