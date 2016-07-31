@@ -11,11 +11,34 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+			   #next{
+
+        position:absolute; 
+        background:#2f2f2a;
+        width: 200px; 
+     	right:45%;
+        top:600px;
+        z-index: 1;
+        padding :10px; 
+        text-align:center;
+        cursor:pointer;
+        border-radius: 4px;
+
+
+
+        }
+        #next:hover{
+        background: #727265;
+        color: black;
+        
+      }
 		</style>
 	</head>
 	<body>
+	 <div id = "next" onclick="next()">Next Shape</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.js"></script>
+
+		<script src="http://threejs.org/build/three.js"></script>
 		
 <!-- <script src="trackballcontrols.js"></script>
 	 <script src="http://threejs.org/examples/js/Detector.js"></script>
@@ -28,10 +51,12 @@
 			var container;
 
 			var camera, scene,renderer, object;
-
+			var number = (Math.floor(Math.random() * (5 -1 + 1)) +1);
 			init();
 			animate();
-
+			function next(){
+				 location.reload();
+			}
 			function init() {
 
 				container = document.createElement( 'div' );
@@ -57,12 +82,34 @@
 				var material = new THREE.MeshBasicMaterial( {wireframe:true,color:0x1e1d1c } );
 
 				//
-				// var object_geometry = new THREE.SphereGeometry( 100, 100, 100 );
-				// // object_geometry.applyMatrix( new THREE.Matrix4().makeScale( 1.0, 1.0, 1.0 ) );
-				// object = new THREE.Mesh( object_geometry, material );
-				// object.position.set(0,0,0);
-				// scene.add( object );
+				if(number==1)
+				{
 
+				var object_geometry = new THREE.SphereGeometry( 100, 100, 100 );
+				object_geometry.applyMatrix( new THREE.Matrix4().makeScale( 1.0, 1.0, 3.0 ) );
+				object = new THREE.Mesh( object_geometry, material );
+				object.position.set(0,0,0);
+				scene.add( object );
+			
+
+				}
+				else if(number==2)
+				{
+				object = new THREE.Mesh( new THREE.TetrahedronGeometry( 150, 0 ), material );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );
+				
+				}
+				else if(number==3)
+				{
+				var object_geometry = new THREE.SphereGeometry( 100, 100, 100 );
+				// object_geometry.applyMatrix( new THREE.Matrix4().makeScale( 1.0, 1.0, 1.0 ) );
+				object = new THREE.Mesh( object_geometry, material );
+				object.position.set(0,0,0);
+				scene.add( object );
+				
+				}
+				
 				// object = new THREE.Mesh( new THREE.IcosahedronGeometry( 75, 1 ), material );
 				// object.position.set( -200, 0, 200 );
 				// scene.add( object );
@@ -71,37 +118,40 @@
 				// object.position.set( 0, 0, 0 );
 				// scene.add( object );
 
-				// object = new THREE.Mesh( new THREE.TetrahedronGeometry( 150, 0 ), material );
-				// object.position.set( 0, 0, 0 );
-				// scene.add( object );
-
-				//
+				
+				
 
 				// object = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100, 4, 4 ), material );
 				// object.position.set( -400, 0, 0 );
 				// scene.add( object );
+				else if(number==4){
+					object = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100, 40, 40, 40 ), material );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );
 
-				// object = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100, 4, 4, 4 ), material );
-				// object.position.set( -200, 0, 0 );
-				// scene.add( object );
 
+				}
+				
 				// object = new THREE.Mesh( new THREE.CircleGeometry( 50, 20, 0, Math.PI * 2 ), material );
 				// object.position.set( 0, 0, 0 );
 				// scene.add( object );
 
-				// object = new THREE.Mesh( new THREE.RingGeometry( 10, 50, 20, 5, 0, Math.PI * 2 ), material );
-				// object.position.set( 0, 0, 0 );
-				// scene.add( object );
-
-				object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 8), material );
+				else if(number>4){
+					var myArray = [4,5,6,8,100];
+					var dumb = myArray[Math.floor(Math.random() * myArray.length)];
+					object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, dumb), material );
 				object.position.set( 0, 0, 0 );
 				scene.add( object );
+				
 
-				//
+				}
+
+				
+				// //
 
 			 geometry = new THREE.Geometry(); /*	NO ONE SAID ANYTHING ABOUT MATH! UGH!	*/
 
-        particleCount = 50000; /* Leagues under the sea */
+        particleCount = 100000; /* Leagues under the sea */
 
         /*	Hope you took your motion sickness pills;
 	We're about to get loopy.	*/
@@ -116,7 +166,7 @@
 
            
 
-        	var p  = (Math.floor(Math.random() * (18 -1 + 1)) +1);
+        	var p  = (Math.floor(Math.random() * (object.geometry.vertices.length -1 + 1)) +1);
         	
         	var vertex = new THREE.Vector3();
         	vertex.x = k ;
@@ -138,7 +188,7 @@
 	Clean that vommit up, we're going again!	*/
 
       
-            var material = new THREE.PointCloudMaterial({color: 0xe75903, size:1});
+            var material = new THREE.PointCloudMaterial({color: 0xe75903, size:0.1});
 
             particles = new THREE.PointCloud(geometry,material);
 
