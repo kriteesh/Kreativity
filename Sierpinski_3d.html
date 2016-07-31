@@ -16,13 +16,14 @@
         position:absolute; 
         background:#2f2f2a;
         width: 200px; 
-     	right:45%;
-        top:600px;
+     	right:40px;
+        bottom:100px;
         z-index: 1;
         padding :10px; 
         text-align:center;
         cursor:pointer;
         border-radius: 4px;
+        color:white;
 
 
 
@@ -51,7 +52,7 @@
 			var container;
 
 			var camera, scene,renderer, object;
-			var number = (Math.floor(Math.random() * (5 -1 + 1)) +1);
+			var number = (Math.floor(Math.random() * (7 -1 + 1)) +1);
 			init();
 			animate();
 			function next(){
@@ -113,10 +114,16 @@
 				// object = new THREE.Mesh( new THREE.IcosahedronGeometry( 75, 1 ), material );
 				// object.position.set( -200, 0, 200 );
 				// scene.add( object );
+				else if(number==7){
+	
+				object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 100), material );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );
+								
+				
 
-				// object = new THREE.Mesh( new THREE.OctahedronGeometry( 100, 2 ), material );
-				// object.position.set( 0, 0, 0 );
-				// scene.add( object );
+				}
+			
 
 				
 				
@@ -125,9 +132,10 @@
 				// object.position.set( -400, 0, 0 );
 				// scene.add( object );
 				else if(number==4){
-					object = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100, 40, 40, 40 ), material );
+					object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 8), material );
 				object.position.set( 0, 0, 0 );
 				scene.add( object );
+				
 
 
 				}
@@ -136,10 +144,17 @@
 				// object.position.set( 0, 0, 0 );
 				// scene.add( object );
 
-				else if(number>4){
-					var myArray = [4,5,6,8,100];
-					var dumb = myArray[Math.floor(Math.random() * myArray.length)];
-					object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, dumb), material );
+				else if(number==5){
+					
+					object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 4), material );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );
+				
+
+				}
+				else if(number==6){
+					
+					object = new THREE.Mesh( new THREE.CylinderGeometry(1, 50*3, 50*3, 6), material );
 				object.position.set( 0, 0, 0 );
 				scene.add( object );
 				
