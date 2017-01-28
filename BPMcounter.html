@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>What's your Tempo ?</title>
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<style type="text/css">
+body {
+    font-family: 'Pacifico', cursive;
+    overflow:hidden;
+}
+#headline {
+  margin : 0.5%;
+  font-family: 'Pacifico', cursive;
+  font-size : 36px;
+  border-bottom: 2px solid black;
+}
+#what {
+  position: absolute;
+  left: 40%;
+  width: 60%;
+}
+  #avgBPM{
+    color:black;
+    font-size :16px;
+    margin:10px;
+  }
+   #BPM{
+    color:white;
+    font-size :12vh;
+    width:100%;
+    height:5%;
+
+    
+
+background: #fe8c00; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #fe8c00 , #f83600); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #fe8c00 , #f83600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+
+  }
+   #taps{
+    color:black;
+    font-size :16px;
+    margin :3%;
+
+  }
+  #reset{
+   margin: 10%;
+    height: 7%;
+    width: 40%;
+    background: #c4bcbc;
+    color: black;
+    border: none;
+    outline: none;
+    border: 3px solid #a69e9e;
+    border-radius: 6px;
+    font-size : 16px;
+    font-family: 'Pacifico', cursive;
+    cursor:pointer;
+  }
+  #song{
+    position:absolute;
+    left:0;
+
+  }
+
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+
+<script language="JavaScript">
+
+
+var count = 0;
+var msecsFirst = 0;
+var msecsPrevious = 0;
+
+function ResetCount()
+  {
+  count = 0;
+  // document.TAP_DISPLAY.T_AVG.value = "";
+  // document.TAP_DISPLAY.T_TAP.value = "";
+  // $("#avgBPM").html("");
+  $("#BPM").html("&#9757;");
+  $("#taps").html("");
+  document.TAP_DISPLAY.T_RESET.blur();
+  }
+
+function TapForBPM(e)
+  {
+  // document.TAP_DISPLAY.T_WAIT.blur();
+  timeSeconds = new Date;
+  msecs = timeSeconds.getTime();
+  // if ((msecs - msecsPrevious) > 1000 * document.TAP_DISPLAY.T_WAIT.value)
+  //   {
+  //   count = 0;
+  //   }
+
+  if (count == 0)
+    {
+  // $("#avgBPM").html("First Beat");
+  $("#BPM").html("...");
+    msecsFirst = msecs;
+    count = 1;
+    }
+  else
+    {
+    bpmAvg = 60000 * count / (msecs - msecsFirst);
+    // $("#avgBPM").html("Average BPM :" + Math.round(bpmAvg * 100) / 100);
+    $("#BPM").html( Math.round(bpmAvg));
+    count++;
+    $("#taps").html("Number of Taps - " + count);
+    }
+  msecsPrevious = msecs;
+  return true;
+  }
+
+document.onkeypress = TapForBPM;
+document.addEventListener('touchstart', function() {
+timeSeconds = new Date;
+  msecs = timeSeconds.getTime();
+  // if ((msecs - msecsPrevious) > 1000 * document.TAP_DISPLAY.T_WAIT.value)
+  //   {
+  //   count = 0;
+  //   }
+
+  if (count == 0)
+    {
+  // $("#avgBPM").html("First Beat");
+  $("#BPM").html("...");
+    msecsFirst = msecs;
+    count = 1;
+    }
+  else
+    {
+    bpmAvg = 60000 * count / (msecs - msecsFirst);
+    // $("#avgBPM").html("Average BPM :" + Math.round(bpmAvg * 100) / 100);
+    $("#BPM").html( Math.round(bpmAvg));
+    count++;
+    $("#taps").html("Number of Taps - " + count);
+    }
+  msecsPrevious = msecs;
+  return true;
+});
+
+
+
+
+//  End -->
+</script>
+</head>
+
+<center id="headline">Measure the Tempo</center>
+<div id="what">
+<center>
+<p id="Instruction"> Start tapping any key | screen to measure BPM </p>
+<div id="BPM">&#9757;</div>
+<div id="taps"></div>
+<input type="button" id="reset" name="T_RESET" value="Reset and measure again" onclick="ResetCount()">
+</center>
+</div>
+
+<iframe width="40%" height="90%" scrolling="yes" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/295442736&amp;auto_play=true&amp;"></iframe>
+
+
+
+</body>
+</html>
