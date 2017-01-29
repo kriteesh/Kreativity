@@ -2,39 +2,32 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	 <link href="https://fonts.googleapis.com/css?family=Biryani|Yatra+One" rel="stylesheet">
-   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="transliterate.js">
+    </script>
     <script type="text/javascript">
- 
-      // Load the Google Transliterate API
-      google.load("elements", "1", {
-            packages: "transliteration"
-          });
- 
-      function onLoad() {
+    // Load the Google Transliterate API
+    google.load("elements", "1", {
+        packages: "transliteration"
+    });
+    function onLoad() {
         var options = {
-            sourceLanguage:
-                google.elements.transliteration.LanguageCode.ENGLISH,
-            destinationLanguage:
-                [google.elements.transliteration.LanguageCode.HINDI],
+            sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
             shortcutKey: 'ctrl+g',
             transliterationEnabled: true
         };
- 
         // Create an instance on TransliterationControl with the required
         // options.
         var control =
             new google.elements.transliteration.TransliterationControl(options);
- 
         // Enable transliteration in the textbox with id
         // 'transliterateTextarea'.
         control.makeTransliteratable(['transliterateTextarea']);
-      }
-      google.setOnLoadCallback(onLoad);
-   	
-
-	</script> 
+    }
+    google.setOnLoadCallback(onLoad);
+    </script>
 <style type="text/css">
-.msg{ 
+.msg{
 border-collapse: collapse;
 padding:4px 4px 4px 4px;
 font-size:24px;
