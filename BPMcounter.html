@@ -1,22 +1,46 @@
 <html>
 <head>
 <title>What's your Tempo ?</title>
-<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Pacifico|Baloo|Eczar" rel="stylesheet">
 <style type="text/css">
 body {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Eczar', cursive;
     overflow:hidden;
+    color:white;
+    background: #3e3e3e;
+
 }
 #headline {
   margin : 0.5%;
-  font-family: 'Pacifico', cursive;
-  font-size : 36px;
-  border-bottom: 2px solid black;
+  font-family: 'Baloo', cursive;
+  font-size : 80px;
+  border-bottom: 2px solid white;
+  padding: 6px;
+  word-spacing: 6px;
+ 
+  animation : shlink infinite linear 0.2s;
+}
+@keyframes shlink{
+  0%{
+    text-shadow:6px 6px #FFFFFF;
+    color: #9ec956 ;
+    
+  }
+  100%{
+    text-shadow: 6px 6px #FF0000;
+    color:white;
+    
+
+  }
+
+}
+#Instruction {
+  word-spacing:6px;
 }
 #what {
   position: absolute;
-  left: 40%;
-  width: 60%;
+/*  left: 40%;*/
+  width: 100%;
 }
   #avgBPM{
     color:black;
@@ -38,13 +62,28 @@ background: linear-gradient(to left, #fe8c00 , #f83600); /* W3C, IE 10+/ Edge, F
 
   }
    #taps{
-    color:black;
+    color: white;
     font-size :16px;
     margin :3%;
 
   }
   #reset{
-   margin: 10%;
+   margin: 5%;
+    height: 7%;
+    width: 40%;
+    background: transparent;
+    color:  white;
+    border: none;
+    outline: none;
+    border: 3px solid #a69e9e;
+    padding: 3px;
+    border-radius: 6px;
+    font-size : 16px;
+    cursor:pointer;
+    font-family: 'Eczar', cursive;
+  }
+  /*#key{
+       margin: 10%;
     height: 7%;
     width: 40%;
     background: #c4bcbc;
@@ -56,6 +95,11 @@ background: linear-gradient(to left, #fe8c00 , #f83600); /* W3C, IE 10+/ Edge, F
     font-size : 16px;
     font-family: 'Pacifico', cursive;
     cursor:pointer;
+
+  }*/
+  #reset:hover{
+    background: #616161;
+
   }
   #song{
     position:absolute;
@@ -83,7 +127,7 @@ function ResetCount()
   // document.TAP_DISPLAY.T_TAP.value = "";
   // $("#avgBPM").html("");
   $("#BPM").html("&#9757;");
-  $("#taps").html("");
+  $("#taps").html("थप थप संख्या ");
   document.TAP_DISPLAY.T_RESET.blur();
   }
 
@@ -110,7 +154,7 @@ function TapForBPM(e)
     // $("#avgBPM").html("Average BPM :" + Math.round(bpmAvg * 100) / 100);
     $("#BPM").html( Math.round(bpmAvg));
     count++;
-    $("#taps").html("Number of Taps - " + count);
+    $("#taps").html("थप थप संख्या  -  " + count);
     }
   msecsPrevious = msecs;
   return true;
@@ -151,17 +195,17 @@ timeSeconds = new Date;
 </script>
 </head>
 
-<center id="headline">Measure the Tempo</center>
+<center id="headline"><!-- <img style="padding-right:100px;" src="download(2).png"> -->जानिये गाने का टेम्पो <!-- <img src="download(2).png" style="padding-left:100px;"> --></center>
 <div id="what">
 <center>
-<p id="Instruction"> Start tapping any key | screen to measure BPM </p>
+<p id="Instruction"> गाने की धुन के अनुसार कीबोर्ड के किसी भी अक्षर पर थपथपाएं <br>और <br>गाने की बी.पी.एम्  पाएं  (शर्ते लागू)</p>
 <div id="BPM">&#9757;</div>
 <div id="taps"></div>
-<input type="button" id="reset" name="T_RESET" value="Reset and measure again" onclick="ResetCount()">
+<input type="button" id="reset" name="T_RESET" value="दोबारा से प्रयास करें " onclick="ResetCount()">
 </center>
 </div>
-
-<iframe width="40%" height="90%" scrolling="yes" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/295442736&amp;auto_play=true&amp;"></iframe>
+<!-- 
+<iframe width="40%" height="90%" scrolling="yes" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/295442736&amp;auto_play=true&amp;"></iframe> -->
 
 
 
