@@ -1,0 +1,73 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.css">
+<script type="text/javascript" src="jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
+<script type="text/javascript" src="algebra.min.js"></script>
+</head>
+<script type="text/javascript">
+$(document).ready(function(){
+var Fraction = algebra.Fraction;
+var Expression = algebra.Expression;
+var Equation = algebra.Equation;
+var a = getRandom(1,7);
+var b = getRandom(-7,7);
+var c = getRandom(1,7);
+var d = getRandom(-7,7);
+var e = getRandom(1,7);
+var lhs = new Expression("x").multiply(a).add(b);
+var rhs = new Expression("x").multiply(c).add(d);
+var factor1 = "(" + a +"x +" + b + ")" ;
+var factor2 =  "(" + c + "x +" + d + ")";
+var six = "\"what\"";
+console.log(six);
+var lhs_wholed = algebra.parse(six);
+
+var lhs_rev =  new Expression(d).add(c).multiply("x");
+var rhs_rev =  new Expression(d).add(c).multiply("x");
+var eq = new Equation(lhs_wholed, rhs);
+var equation = eq.toString();
+
+$('#problem').html("Solve the equation : &nbsp;" + equation) ; 
+
+// var MQ = MathQuill.getInterface(2);
+
+// var problemSpan = document.getElementById('problem');
+// problemSpan ="ax^2+bx+c";
+// MQ.StaticMath(problemSpan);
+});
+
+function getRandom(min, max) {
+    var num = Math.floor(Math.random() * (max - min + 1)) + min;
+     return (num === 0 ) ? getRandom(min, max) : num;
+
+}
+
+function getRandomArbit(min, max) {
+
+    var num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return (num === 8 || num === 15) ? generateRandomArbit(min, max) : num;
+
+}
+
+
+
+
+
+</script>
+<body>
+	<div id="qStem">	
+	<span id="problem"></span>
+	</div>
+	<div id="responseStem">	
+	</div>
+	<div id="parent" class="button">	
+	</div>
+	<div id="sibling" class="button">	
+	</div>
+	<div id="child" class="button">	
+	</div>
+</body>
+
+
+</html>
