@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width" />
 	<link href="https://fonts.googleapis.com/css?family=Rajdhani|Palanquin+Dark" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta1/katex.min.css'>
 	<style>
 	html,body{
 		margin:0 auto;
-		overflow: hidden;
+		overflow-x: hidden;
+/*		overflow: hidden;*/
 		height :100%;
 		width : 100%;
 		background-color: #222222;
   		background: repeating-linear-gradient(45deg, #2b2b2b 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 / 35px 35px;
 	}
-		.item1 { grid-area: header; font-size: 84px; 
+		.item1 { grid-area: header; font-size: 2.5em; 
 				color: #244158;
 				font-family: 'Palanquin Dark', sans-serif;
 				grid-area: header;
@@ -33,27 +35,56 @@
 		.item2 { grid-area: menu; }
 		.item3 { grid-area: main;}
 		
-		.item4 { grid-area: right; font-size: 25px; color : white; padding : 10px; font-family: 'Rajdhani', sans-serif; align-self:center; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFDD1B, 0 0 70px #FFDD1B, 0 0 80px #FFDD1B, 0 0 100px #FFDD1B, 0 0 150px #FFDD1B;}
+		.item4 { grid-area: right; font-size: 1.2em; color : white; padding : 10px; font-family: 'Rajdhani', sans-serif; align-self:center; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFDD1B, 0 0 70px #FFDD1B, 0 0 80px #FFDD1B, 0 0 100px #FFDD1B, 0 0 150px #FFDD1B;}
 
-		.item5 { grid-area: footer; align-self:center; font-size: 30px; color : white; 
+		.item5 { grid-area: footer; align-self:center; color : white; 
 			text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px grey, 0 0 70px #ccc, 0 0 80px #ccc, 0 0 100px #ccc, 0 0 150px #ccc;
 		}
 
 
+		
 		.grid-container {
 		  display: grid;
-		  grid-template-rows: 1.5fr 3.3fr 1.2fr;
+		  grid-template-rows: 0.25fr 3fr 0.25fr 3fr 0.5fr;
+/*		  grid-template-rows: 10% 30% 30% 20% 10%;*/
 		  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
 		  grid-template-areas:
 			'header header header header header header'
-			'menu menu main main right right'
-			'footer footer footer footer footer footer';
-/*		  grid-gap: 1px;*/
-		  height :100%;
-		  width : 100%;
+			'menu menu menu menu replaying replaying '
+			'footer footer footer footer footer footer'
+			'main main main main main main'
+			'right right right right right right';
+
+		}
+		
+		@media screen and (min-width:760px){
+			.item1{
+				font-size: 84px;
+			}
+			.item4 {
+				font-size: 25px;
+			}
+			.item5{
+				font-size : 30px;
+			}
+		.grid-container {
+			  display: grid;
+			  grid-template-rows: 1.5fr 3.3fr 1.2fr;
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+			  grid-template-areas:
+				'header header header header header header'
+				'menu menu main main right right'
+				'footer footer footer footer footer replaying';
+
+			  height :100%;
+			  width : 100%;
 
 
 		}
+		}
+		
+	
+		
 		.grid-container > div {
 			
 /*		  background-color: rgba(255, 255, 255, 0.8);*/
@@ -62,10 +93,9 @@
 		  
 		}
 		
-		#replay{
-			position: absolute;
-			top : 40%;
-			left : 25%;
+		.replay{
+			grid-area: replaying;
+			align-self:center;
 			color : bisque;
 			cursor : pointer;
 			font-size:  40px;
@@ -82,7 +112,7 @@
   <div class="item1">❁ माधव ❁ </div>
   <div class="item2"></div>
   <div class="item3"></div>  
-  <div class="item4" onmouseout = "quote(1)" onmouseover ="quote(2)">
+  <div class="item4" onmouseout = "quote(1)" onmouseover ="quote(2)" >
 	  व्यासे वारिधिनिहते रूपहृते व्याससागराभिहते।
 	  <br>
 त्रिशरादिविषमसंख्यामत्तमृणं स्वं पृथक् क्रमात् कुर्यात् ॥
@@ -91,8 +121,9 @@
 	  <br>
 तस्या उर्धगताया समसंख्या तद्दालं गुणोऽन्ते स्यात् ॥   </div>
   <div class="item5"></div>
+<div class="replay material-icons" onclick="replay()">replay</div>
+  
 </div>
-<div id="replay" class="material-icons" onclick="replay()">replay</div>
 </body>
 	
 <script>
@@ -113,9 +144,9 @@ let w = interact.width = document.getElementsByClassName("item3")[0].clientWidth
 let h = interact.height = document.getElementsByClassName("item3")[0].clientHeight;
 document.getElementsByClassName("item3")[0].appendChild(interact);
 const ctx = interact.getContext("2d");
-const radius = w*0.75;	
-let x_o = w*0.05;
-let y_o = h*0.95;
+const radius = w*0.8;	
+let x_o = w*0.1;
+let y_o = h*0.9;
 	
 const picture =  document.createElement("canvas");
 let w_p = picture.width = document.getElementsByClassName("item2")[0].clientWidth;
@@ -232,7 +263,7 @@ function animate(){
 	
 	ctx.shadowBlur = 48;
 	ctx.shadowColor = "#e75903";
-	image_flicker(20 + 20*Math.sin(10*shadow_temp),5*Math.sin(2*shadow_temp));
+	image_flicker(20,5*Math.sin(2*shadow_temp));
 	pos = sketchArr[counter];
 	if(counter==0) frac = "";
  	else if(counter==1) frac = "1";
