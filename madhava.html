@@ -45,15 +45,18 @@
 		
 		.grid-container {
 		  display: grid;
-		  grid-template-rows: 0.25fr 3fr 0.25fr 3fr 0.5fr;
+		  grid-template-rows: 0.25fr 3fr 0.5fr 3fr 0.25fr;
 /*		  grid-template-rows: 10% 30% 30% 20% 10%;*/
 		  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
 		  grid-template-areas:
 			'header header header header header header'
 			'menu menu menu menu replaying replaying '
-			'footer footer footer footer footer footer'
+			'right right right right right right'
+	
 			'main main main main main main'
-			'right right right right right right';
+			 
+			'footer footer footer footer footer footer'
+			;
 
 		}
 		
