@@ -13,7 +13,7 @@
 			}
 			.container{
 				display:grid;
-				grid-template-rows: 1fr 6fr 1fr;
+				grid-template-rows: 1fr 8fr 1fr;
 				grid-template-columns: 1fr 6fr 1fr;
 				grid-template-areas: 
 					'header header header'
@@ -30,9 +30,7 @@
 				padding :20px;
 				user-select: none;
 			}
-			.options{
-				grid-area : options;
-			}
+	
 			.header{
 				grid-area : header;
 				font-size : 40px;
@@ -46,34 +44,36 @@
 				
 			}
 			.outputs{
-				grid-area : outputs;
-				background : #e75903;
-				color : white;
-				cursor : pointer;
-				width : 100px;
-				height : 100px;
-				border-radius : 50px;
-				font-size : 30px;
-				align-self: center;
-				line-height: 90px;
-				justify-self : center;
-				 user-select: none;
+				    grid-area: outputs;
+					background: #e75903;
+					color: white;
+					cursor: pointer;
+					width: 50px;
+					height: 50px;
+					border-radius: 25px;
+					font-size: 26px;
+					align-self: end;
+					justify-self: center;
+					user-select: none;
+					line-height: 44px;
+					margin-bottom : 10px;
 			}
 
 			
 			.options{
-				grid-area : options;
-				background : #e75903;
-				color : white;
-				cursor : pointer;
-				width : 100px;
-				height : 100px;
-				border-radius : 50px;
-				font-size : 30px;
-				align-self: center;
-				line-height: 90px;
-				justify-self: center;
-				 user-select: none;
+					grid-area : options;
+					background: #e75903;
+					color: white;
+					cursor: pointer;
+					width: 50px;
+					height: 50px;
+					border-radius: 25px;
+					font-size: 26px;
+					align-self: end;
+					justify-self: center;
+					user-select: none;
+					line-height: 44px;
+					margin-bottom : 10px;
 			}
 			.outputs:active{
 				background: #9ec956;
@@ -90,9 +90,9 @@
 			<div class="header">सुन्दरकाण्ड</div>
 			<div class="main">
 			</div>
-			<div class="options" onclick="produce(1)">पिछला
+			<div class="options" onclick="produce(1)">❮
 			</div>
-			<div class="outputs" onclick="produce(2)">अगला 
+			<div class="outputs" onclick="produce(2)">❯ 
 			</div>
 			<div class="footer"></div>
 		</div>
@@ -127,8 +127,7 @@
 		let current = 0; 
 		
 		function produce(num){
-			if(num==1) checker(arr[current-1]) ;
-			else checker(arr[current+1]) ;
+			window.scrollTo(0, 0);
 			if(num==1)
 				{
 					if(current==0) { main.innerHTML = arr[0]; }
