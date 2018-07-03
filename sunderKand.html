@@ -14,7 +14,7 @@
 			.container{
 				display:grid;
 				grid-template-rows: 1fr 8fr 1fr;
-				grid-template-columns: 1fr 6fr 1fr;
+				grid-template-columns: 1fr 8fr 1fr;
 				grid-template-areas: 
 					'header header header'
 					'options main outputs'
@@ -92,13 +92,7 @@
 			<div class="header">सुन्दरकाण्ड</div>
 			<div class="main">
 			</div>
-<!--
-			<div class="options" onclick="produce(1)">❮
-			</div>
-			<div class="outputs" onclick="produce(2)">❯ 
-			</div>
 			<div class="footer"></div>
--->
 		</div>
 	</body>
 	<script>
@@ -130,8 +124,8 @@
 		
 		let current = 0; 
 		
-		$(".container").on( "swipeleft", produce(2) );
-		$(".container").on( "swiperight", produce(1) );
+		$(".container").on( "swipeleft", produce(1) );
+		$(".container").on( "swiperight", produce(2) );
 		
 		function produce(num){
 			window.scrollTo(0, 0);
