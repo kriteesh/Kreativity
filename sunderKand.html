@@ -25,14 +25,15 @@
 				grid-gap: 2px;
 			}
 			.main{ grid-area : main;
-				font-size : 1.2em;
-				line-height: 30px;
+				font-size : 2em;
+				line-height: 50px;
+				padding :20px;
 				user-select: none;
 			}
 	
 			.header{
 				grid-area : header;
-				font-size : 30px;
+				font-size : 40px;
 				background : #e75903;
 				color : white;
 				padding : 10px;
@@ -47,14 +48,14 @@
 					background: #e75903;
 					color: white;
 					cursor: pointer;
-					width: 40px;
-					height: 40px;
-					border-radius: 20px;
-					font-size: 20px;
+					width: 50px;
+					height: 50px;
+					border-radius: 25px;
+					font-size: 26px;
 					align-self: end;
 					justify-self: center;
 					user-select: none;
-					line-height: 34px;
+					line-height: 44px;
 					margin-bottom : 10px;
 			}
 
@@ -64,14 +65,14 @@
 					background: #e75903;
 					color: white;
 					cursor: pointer;
-					width: 40px;
-					height: 40px;
-					border-radius: 20px;
-					font-size: 20px;
+					width: 50px;
+					height: 50px;
+					border-radius: 25px;
+					font-size: 26px;
 					align-self: end;
 					justify-self: center;
 					user-select: none;
-					line-height: 34px;
+					line-height: 44px;
 					margin-bottom : 10px;
 			}
 			.outputs:active{
@@ -82,6 +83,8 @@
 			}
 			}
 		</style>
+		<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="sundarkand.json"></script>
 	</head>
 	<body>
@@ -89,11 +92,13 @@
 			<div class="header">सुन्दरकाण्ड</div>
 			<div class="main">
 			</div>
+<!--
 			<div class="options" onclick="produce(1)">❮
 			</div>
 			<div class="outputs" onclick="produce(2)">❯ 
 			</div>
 			<div class="footer"></div>
+-->
 		</div>
 	</body>
 	<script>
@@ -124,6 +129,9 @@
 		main.innerHTML = arr[0];
 		
 		let current = 0; 
+		
+		$(".container").on( "swipeleft", produce(2) );
+		$(".container").on( "swiperight", produce(1) );
 		
 		function produce(num){
 			window.scrollTo(0, 0);
@@ -157,5 +165,6 @@
 					main.style.lineHeight = '50px';
 				}
 		}
+		
 	</script>
 </html>
