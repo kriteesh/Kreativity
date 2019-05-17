@@ -75,7 +75,7 @@ var svg = d3.select("body").append("svg")
 
 var g = svg.append("g");
 
-d3.json("js/districtsTopo.json", function(error, topology) {
+d3.json("https://raw.githubusercontent.com/deldersveld/topojson/master/countries/india/india-districts.json", function(error, topology) {
   if (error) throw error;
 
   g.append("g")
