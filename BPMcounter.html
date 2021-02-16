@@ -181,8 +181,9 @@ timeSeconds = new Date;
     bpmAvg = 60000 * count / (msecs - msecsFirst);
     // $("#avgBPM").html("Average BPM :" + Math.round(bpmAvg * 100) / 100);
     $("#BPM").html( Math.round(bpmAvg));
+    console.log(Math.round(bpmAvg));
     count++;
-        console.log(count);
+    
     $("#taps").html("Number of Taps - " + count);
     }
   msecsPrevious = msecs;
